@@ -1,2 +1,5 @@
 .idea/
 .DS_Store
+.taskcat.yml
+.taskcat/
+taskcat_outputs/
