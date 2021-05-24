@@ -1,6 +1,17 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Description: Deploys Portworx Enterprise into an existing Kubernetes Cluster (qs-1pb1dqsjr)
 Metadata:
+  QSLint:
+    Exclusions: [ W9002, W9003, W9004, W9006 ]
+  cfn-lint:
+    config:
+      ignore_checks:
+        - E9904
+        - E9902
+        - W9901
+        - EIAMPolicyWildcardResource
+      ignore_reasons:
+        EIAMPolicyWildcardResource: (Line 1289-1312) Done by Design
   AWS::CloudFormation::Interface:
     ParameterGroups:
     - Label:
