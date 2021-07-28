@@ -28,6 +28,7 @@ Metadata:
       - NodeVolumeSize
       - AdditionalEKSAdminArns
       - KubernetesVersion
+      - LambdaZipsBucketName
     - Label:
         default: Portworx configuration
       Parameters:
@@ -75,6 +76,8 @@ Metadata:
         default: Number of nodes
       NodeGroupName:
         default: Node group name
+      LambdaZipsBucketName:
+        default: Bucket name for Lambda zip files
       NodeVolumeSize:
         default: Node volume size
       PortworxVersion:
@@ -270,7 +273,7 @@ Parameters:
     Type: String
     Default: ''
   KubernetesVersion:
-    Description: The Kubernetes version of the Amazon EKS cluster. (https://github.com/aws-quickstart/quickstart-amazon-eks/blob/master/templates/amazon-eks.template.yaml#L142)
+    Description: The Kubernetes version of the Amazon EKS cluster. (https://github.com/aws-quickstart/quickstart-amazon-eks/blob/main/templates/amazon-eks.template.yaml#L142)
     Type: String
     Default: "1.13"
   PortworxVersion:

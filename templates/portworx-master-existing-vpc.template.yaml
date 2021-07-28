@@ -26,6 +26,7 @@ Metadata:
       - NodeVolumeSize
       - AdditionalEKSAdminArns
       - KubernetesVersion
+      - LambdaZipsBucketName
     - Label:
         default: Portworx configuration
       Parameters:
@@ -55,6 +56,8 @@ Metadata:
         default: Node group name
       NodeVolumeSize:
         default: Node volume size
+      LambdaZipsBucketName:
+        default: The Bucket name for the Lambda .zip files
       PublicSubnet1ID:
         default: Public Subnet 1 ID
       PublicSubnet2ID:
@@ -212,7 +215,7 @@ Parameters:
     Type: String
   LambdaZipsBucketName:
     Description: '[OPTIONAL] The name of the bucket where the Lambda .zip files should be placed;
-if left blank, a bucket will be created.'
+    if left blank, a bucket will be created.'
     Type: String
     Default: ''
   VPCID:
@@ -234,7 +237,7 @@ if left blank, a bucket will be created.'
     Description: The ID of the private subnet 3 in Availability Zone 3 (e.g., subnet-a0246dcd).
     Type: "AWS::EC2::Subnet::Id"
   KubernetesVersion:
-    Description: The Kubernetes version  of the Amazon EKS cluster. (https://github.com/aws-quickstart/quickstart-amazon-eks/blob/master/templates/amazon-eks.template.yaml#L142)
+    Description: The Kubernetes version  of the Amazon EKS cluster. (https://github.com/aws-quickstart/quickstart-amazon-eks/blob/main/templates/amazon-eks.template.yaml#L142)
     Type: String
     Default: "1.13"
   PortworxVersion:
@@ -277,7 +280,6 @@ Resources:
         VPCID: !Ref VPCID
         KubernetesVersion: !Ref KubernetesVersion
   PortworxStack:
-    DependsOn: EKSStack
     Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL: !Sub 'https://${QSS3BucketName}.s3.amazonaws.com/${QSS3KeyPrefix}templates/portworx.template.yaml'
